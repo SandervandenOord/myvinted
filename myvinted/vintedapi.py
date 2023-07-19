@@ -11,6 +11,7 @@ class VintedApi:
         Set cookie needed for being able to call  the vinted api.
         You only need the '_vinted_fr_session' part of the cookie.
         """
+
         url = "https://www.vinted.nl"
         response = requests.get(url)
         full_cookie = response.headers["Set-Cookie"]
@@ -18,7 +19,9 @@ class VintedApi:
         self.cookie = essential_cookie
 
     @property
-    def headers(self):
+    def headers(self) -> dict:
+        """Get necessary headers to be able to make a working api call"""
+
         return {
             "host": "www.vinted.nl",
             "cookie": self.cookie,
@@ -28,13 +31,16 @@ class VintedApi:
         """
         Returns json dictionary of available languages.
         """
+
         url = self.base_url + "languages"
         response = requests.get(url, headers=self.headers)
+
         return response.json()
 
 
 def main():
     vinted_api = VintedApi()
+
     vinted_api.set_cookie()
 
     languages = vinted_api.get_languages()
