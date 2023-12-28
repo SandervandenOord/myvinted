@@ -1,5 +1,6 @@
-import requests
 import re
+
+import requests
 
 
 class VintedApi:
@@ -37,6 +38,16 @@ class VintedApi:
 
         return response.json()
 
+    def get_events(self) -> dict:
+        """
+        Returns recent events.
+        """
+
+        url = self.base_url + "feed/events"
+        response = requests.get(url, headers=self.headers)
+
+        return response.json()
+
 
 def main():
     vinted_api = VintedApi()
@@ -44,7 +55,9 @@ def main():
     vinted_api.set_cookie()
 
     languages = vinted_api.get_languages()
+    events = vinted_api.get_events()
     print(languages)
+    print(events)
 
 
 if __name__ == "__main__":
