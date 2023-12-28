@@ -1,6 +1,8 @@
 import re
+from pprint import pprint
 
 import requests
+from myvinted.data import Language
 
 
 class VintedApi:
@@ -36,7 +38,7 @@ class VintedApi:
         url = self.base_url + "languages"
         response = requests.get(url, headers=self.headers)
 
-        return response.json()
+        return response.json()["languages"]
 
     def get_events(self) -> dict:
         """
@@ -57,6 +59,11 @@ def main():
     languages = vinted_api.get_languages()
     events = vinted_api.get_events()
     print(languages)
+
+    languages_processed = [Language(**language) for language in languages]
+    for language in languages_processed:
+        pprint(language.model_dump())
+
     print(events)
 
 
