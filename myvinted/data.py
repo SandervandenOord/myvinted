@@ -8,6 +8,18 @@ class BaseModelAdj(BaseModel):
     )
 
 
+class ApiUrl(BaseModelAdj):
+    base: str
+    languages: str
+    events_feed: str
+    users: str
+    items: str
+
+
+class Config(BaseModelAdj):
+    api_url: ApiUrl
+
+
 class Language(BaseModelAdj):
     id: int
     code: str

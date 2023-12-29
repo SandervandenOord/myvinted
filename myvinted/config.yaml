@@ -1,0 +1,6 @@
+api_url:
+  base: https://www.vinted.nl/api/v2/
+  languages: https://www.vinted.nl/api/v2/languages
+  events_feed: https://www.vinted.nl/api/v2/feed/events # loads of flags possible here ?max_score=1703813644&item_count=33&fetch_count=2
+  users: https://www.vinted.nl/api/v2/users      # followed by /<user_id>?localize=false
+  items: https://www.vinted.nl/api/v2/items       # followed by /<item_id> for example /3917024286

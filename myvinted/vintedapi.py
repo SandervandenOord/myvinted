@@ -2,7 +2,9 @@ import re
 from pprint import pprint
 
 import requests
-from myvinted.data import Language
+import yaml
+
+from myvinted.data import Language, Config
 
 
 class VintedApi:
@@ -52,13 +54,18 @@ class VintedApi:
 
 
 def main():
+    with open("config.yaml", "r") as yaml_file:
+        config = Config(**yaml.safe_load(yaml_file))
+
+    print(config)
+
     vinted_api = VintedApi()
 
     vinted_api.set_cookie()
 
     languages = vinted_api.get_languages()
     events = vinted_api.get_events()
-    print(languages)
+    pprint(languages)
 
     languages_processed = [Language(**language) for language in languages]
     for language in languages_processed:
