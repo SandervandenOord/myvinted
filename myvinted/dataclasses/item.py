@@ -204,18 +204,6 @@ class BrandDto(BaseModelAdj):
     is_favourite: bool
 
 
-class AcceptedPayInMethod1(BaseModelAdj):
-    id: int
-    code: str
-    requires_credit_card: bool
-    event_tracking_code: str
-    icon: str
-    enabled: bool
-    translated_name: str
-    note: str
-    method_change_possible: bool
-
-
 class Item(BaseModelAdj):
     id: int
     title: str
@@ -311,7 +299,7 @@ class Item(BaseModelAdj):
     brand_dto: BrandDto
     path: str
     url: str
-    accepted_pay_in_methods: list[AcceptedPayInMethod1]
+    accepted_pay_in_methods: list[AcceptedPayInMethod]
     created_at: str
     color1: str
     color2: str
