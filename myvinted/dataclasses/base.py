@@ -18,12 +18,3 @@ class ApiUrl(BaseModelAdj):
 
 class Config(BaseModelAdj):
     api_url: ApiUrl
-
-
-class Language(BaseModelAdj):
-    id: int
-    code: str
-    title: str
-    title_local: str
-    current: bool
-    title_short: str
