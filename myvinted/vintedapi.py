@@ -4,7 +4,9 @@ from pprint import pprint
 import requests
 import yaml
 
-from myvinted.data import Language, Config
+from myvinted.dataclasses.base import Config
+from myvinted.dataclasses.item import Item
+from myvinted.dataclasses.language import Language
 
 
 class VintedApi:
@@ -52,6 +54,16 @@ class VintedApi:
 
         return response.json()
 
+    def get_item(self, item_id: int) -> dict:
+        """
+        Returns item properties.
+        """
+
+        url = f"{self.base_url}/items/{item_id}"
+        response = requests.get(url, headers=self.headers)
+
+        return response.json()["item"]
+
 
 def main():
     with open("config.yaml", "r") as yaml_file:
@@ -65,13 +77,20 @@ def main():
 
     languages = vinted_api.get_languages()
     events = vinted_api.get_events()
-    pprint(languages)
+    # pprint(languages)
 
     languages_processed = [Language(**language) for language in languages]
-    for language in languages_processed:
-        pprint(language.model_dump())
+    # for language in languages_processed:
+    #     pprint(language.model_dump())
 
-    print(events)
+    # print(events)
+
+    item_raw = vinted_api.get_item(3917024286)
+    pprint(item_raw)
+
+    item = Item(**item_raw)
+
+    pprint(item)
 
 
 if __name__ == "__main__":
